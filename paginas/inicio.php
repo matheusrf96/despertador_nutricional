@@ -24,7 +24,7 @@ function atualizarDiferenca($dif){
 }
 
 $hora_atual = new DateTime("now", new DateTimeZone('America/Sao_Paulo'));
-// $hora_atual = new DateTime('00:00');
+// $hora_atual = new DateTime('09:30');
 echo date_format($hora_atual, 'H:i');
 
 $dif = '00:00';
@@ -41,14 +41,14 @@ $dif = '00:00';
 ?>
 
 <div class="refeicao">
-    Café da Manhã: 
     <?php 
         if(isset($_SESSION['horario_inicial'])){
-            if(date_format($hora_atual, 'H:i') >= $_SESSION['horario_inicial'] && date_format($hora_atual, 'H:i') <= atualizarDiferenca($dif)){
-                echo "<p class='red-text'>".$_SESSION['horario_inicial']."</p>";
+            if(date_format($hora_atual, 'H:i') >= $_SESSION['horario_inicial'] && date_format($hora_atual, 'H:i') < somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Café da Manhã: ".$_SESSION['horario_inicial'];
             }
             else{
-                echo $_SESSION['horario_inicial'];
+                echo "Café da Manhã: ".$_SESSION['horario_inicial'];
             }
         }
      ?>
@@ -56,47 +56,17 @@ $dif = '00:00';
 <hr />
 
 <div class="refeicao">
-    Lanche da Manhã: 
-    <?php 
-        if(isset($_SESSION['horario_inicial'])){
-            echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif)); 
-        }    
-    ?>
-</div>
-<hr />
-
-<div class="refeicao">
-    Almoço: 
-    <?php 
-        if(isset($_SESSION['horario_inicial'])){
-            echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif)); 
-        }
-    ?>
-</div>
-<hr />
-
-<div class="refeicao">
-    Café da Tarde: 
-    <?php 
-        if(isset($_SESSION['horario_inicial'])){
-            echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
-        }
-    ?>
-</div>
-<hr />
-
-<div class="refeicao">
-    Lanche da Tarde: 
     <?php 
         if(isset($_SESSION['horario_inicial'])){
             if(
                 date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
-                && date_format($hora_atual, 'H:i') <= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
-            ){
-                echo "<span class='red-text'>".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif))."</span>";
+                && date_format($hora_atual, 'H:i') < somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
+                ){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Lanche da Manhã: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
             }
             else{
-                echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+                echo "Lanche da Manhã: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
             }
         }
     ?>
@@ -104,10 +74,72 @@ $dif = '00:00';
 <hr />
 
 <div class="refeicao">
-    Jantar: 
     <?php 
         if(isset($_SESSION['horario_inicial'])){
-            echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            if(
+                date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
+                && date_format($hora_atual, 'H:i') < somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
+                ){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Almoço: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+            else{
+                echo "Almoço: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+        }
+    ?>
+</div>
+<hr />
+
+<div class="refeicao">
+    <?php 
+        if(isset($_SESSION['horario_inicial'])){
+            if(
+                date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
+                && date_format($hora_atual, 'H:i') < somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
+                ){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Café da Tarde: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+            else{
+                echo "Café da Tarde: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+        }
+    ?>
+</div>
+<hr />
+
+<div class="refeicao">
+    <?php 
+        if(isset($_SESSION['horario_inicial'])){
+            if(
+                date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
+                && date_format($hora_atual, 'H:i') < somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
+                ){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Lanche da Tarde: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+            else{
+                echo "Lanche da Tarde: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+        }
+    ?>
+</div>
+<hr />
+
+<div class="refeicao">
+    <?php 
+        if(isset($_SESSION['horario_inicial'])){
+            if(
+                date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
+                && date_format($hora_atual, 'H:i') < new DateTime('22:30')
+                ){
+                echo "<i class='red-text'>Refeição atual</i><br />";
+                echo "Jantar: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+            else{
+                echo "Jantar: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
         }
     ?>
 </div>
