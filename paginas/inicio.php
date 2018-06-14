@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 function somarTempo() {
     $i = 0;
     foreach (func_get_args() as $time) {
@@ -20,7 +23,10 @@ function atualizarDiferenca($dif){
     return somarTempo($dif, '03:00');
 }
 
-$horario = $_SESSION['horario_inicial'];
+$hora_atual = new DateTime("now", new DateTimeZone('America/Sao_Paulo'));
+// $hora_atual = new DateTime('00:00');
+echo date_format($hora_atual, 'H:i');
+
 $dif = '00:00';
 
 ?>
@@ -37,8 +43,14 @@ $dif = '00:00';
 <div class="refeicao">
     Café da Manhã: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
-            echo $_SESSION['horario_inicial'];
+        if(isset($_SESSION['horario_inicial'])){
+            if(date_format($hora_atual, 'H:i') >= $_SESSION['horario_inicial'] && date_format($hora_atual, 'H:i') <= atualizarDiferenca($dif)){
+                echo "<p class='red-text'>".$_SESSION['horario_inicial']."</p>";
+            }
+            else{
+                echo $_SESSION['horario_inicial'];
+            }
+        }
      ?>
 </div>
 <hr />
@@ -46,9 +58,9 @@ $dif = '00:00';
 <div class="refeicao">
     Lanche da Manhã: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
+        if(isset($_SESSION['horario_inicial'])){
             echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif)); 
-    
+        }    
     ?>
 </div>
 <hr />
@@ -56,8 +68,9 @@ $dif = '00:00';
 <div class="refeicao">
     Almoço: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
+        if(isset($_SESSION['horario_inicial'])){
             echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif)); 
+        }
     ?>
 </div>
 <hr />
@@ -65,8 +78,9 @@ $dif = '00:00';
 <div class="refeicao">
     Café da Tarde: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
+        if(isset($_SESSION['horario_inicial'])){
             echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+        }
     ?>
 </div>
 <hr />
@@ -74,8 +88,17 @@ $dif = '00:00';
 <div class="refeicao">
     Lanche da Tarde: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
-            echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif)); 
+        if(isset($_SESSION['horario_inicial'])){
+            if(
+                date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
+                && date_format($hora_atual, 'H:i') <= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca(atualizarDiferenca($dif)))
+            ){
+                echo "<span class='red-text'>".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif))."</span>";
+            }
+            else{
+                echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+            }
+        }
     ?>
 </div>
 <hr />
@@ -83,8 +106,9 @@ $dif = '00:00';
 <div class="refeicao">
     Jantar: 
     <?php 
-        if(isset($_SESSION['horario_inicial']))
+        if(isset($_SESSION['horario_inicial'])){
             echo somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
+        }
     ?>
 </div>
 
