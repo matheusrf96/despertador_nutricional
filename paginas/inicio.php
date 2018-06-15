@@ -16,6 +16,7 @@ function somarTempo() {
     if($h >= 24){
         $h -= 24;
     }
+
     return sprintf('%02d:%02d', $h, $i);
 }
 
@@ -24,8 +25,8 @@ function atualizarDiferenca($dif){
 }
 
 $hora_atual = new DateTime("now", new DateTimeZone('America/Sao_Paulo'));
-// $hora_atual = new DateTime('09:30');
-echo date_format($hora_atual, 'H:i');
+// $hora_atual = new DateTime('07:30');
+echo "Hora Atual: ".date_format($hora_atual, 'H:i');
 
 $dif = '00:00';
 
@@ -132,7 +133,7 @@ $dif = '00:00';
         if(isset($_SESSION['horario_inicial'])){
             if(
                 date_format($hora_atual, 'H:i') >= somarTempo($_SESSION['horario_inicial'], atualizarDiferenca($dif))
-                && date_format($hora_atual, 'H:i') < new DateTime('22:30')
+                && date_format($hora_atual, 'H:i') < new DateTime('23:59')
                 ){
                 echo "<i class='red-text'>Refeição atual</i><br />";
                 echo "Jantar: ".somarTempo($_SESSION['horario_inicial'], $dif = atualizarDiferenca($dif));
