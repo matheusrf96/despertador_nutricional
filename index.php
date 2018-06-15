@@ -43,7 +43,7 @@ else{
 	<footer class="page-footer footer-fixed cyan lighten-3">
         <div class="footer-copyright">
             <div class="container white-text">
-           		© 2018 Copyright Text
+           		© 2018. Equipe: Daniel de Paula, Jeferson Maciel, Matheus Rodrigues, Rafael do Prado
             </div>
         </div>
     </footer>
