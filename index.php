@@ -24,7 +24,7 @@ else{
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<nav class="cyan lighten-3">
+	<nav class="blue lighten-2">
 		<div class="nav-wrapper container">
 			<a href="?pg=inicio" class="brand-logo">Roteiro Nutricional</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -40,7 +40,7 @@ else{
 		</div>
 	</main>
 
-	<footer class="page-footer footer-fixed cyan lighten-3">
+	<footer class="page-footer footer-fixed blue lighten-2">
         <div class="footer-copyright">
             <div class="container white-text">
            		© 2018. Equipe: Daniel de Paula, Jeferson Maciel, Matheus Rodrigues, Rafael do Prado

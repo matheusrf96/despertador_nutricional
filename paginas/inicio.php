@@ -26,13 +26,14 @@ function atualizarDiferenca($dif){
 
 $hora_atual = new DateTime("now", new DateTimeZone('America/Sao_Paulo'));
 // $hora_atual = new DateTime('07:30');
-echo "Hora Atual: ".date_format($hora_atual, 'H:i');
 
 $dif = '00:00';
 
 ?>
 
 <h4>Roteiro: </h4>
+
+<?php echo "Hora Atual: ".date_format($hora_atual, 'H:i'); ?>
 
 <?php 
     if(!isset($_SESSION['horario_inicial'])){
