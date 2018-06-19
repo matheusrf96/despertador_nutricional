@@ -7,7 +7,9 @@
                 <input id="horario" name="horario" type="time" class="validate" required />
                 <label for="horario">Horário Inicial</label>
 
-                <input class="waves-effect waves-light btn blue lighten-2 white-text" type="submit" value="Enviar" />
+                <button class="btn waves-effect waves-light blue lighten-2" type="submit" name="action">Enviar
+                    <i class="material-icons right white-text">send</i>
+                </button>
             </div>
         </form>
     </div>
